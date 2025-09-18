@@ -134,7 +134,7 @@ export const ProductDetailsModal: React.FC<ProductDetailsModalProps> = ({
                       <div className="flex items-center space-x-2">
                         <DollarSign className="h-4 w-4 text-muted-foreground" />
                         <span className="text-sm font-medium">Price:</span>
-                        <span className="text-lg font-bold text-primary">${product.price.toFixed(2)}</span>
+                        <span className="text-lg font-bold text-primary">₹{product.price.toFixed(2)}</span>
                       </div>
                       
                       <div className="flex items-center space-x-2">

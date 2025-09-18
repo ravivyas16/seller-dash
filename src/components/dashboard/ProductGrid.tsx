@@ -154,7 +154,7 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
                   <div className="flex items-center space-x-1">
                     <DollarSign className="h-4 w-4 text-primary" />
                     <span className="text-xl font-bold text-primary">
-                      ${product.price.toFixed(2)}
+                      ₹{product.price.toFixed(2)}
                     </span>
                   </div>
                   

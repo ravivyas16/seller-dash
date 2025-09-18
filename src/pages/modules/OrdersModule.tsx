@@ -120,7 +120,7 @@ export const OrdersModule: React.FC = () => {
             <CardTitle className="text-sm font-medium">Revenue</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">${stats.totalRevenue.toFixed(2)}</div>
+            <div className="text-2xl font-bold">₹{stats.totalRevenue.toFixed(2)}</div>
           </CardContent>
         </Card>
       </div>
@@ -154,7 +154,7 @@ export const OrdersModule: React.FC = () => {
                   <TableCell className="font-medium">{order.productName}</TableCell>
                   <TableCell>{order.customerName}</TableCell>
                   <TableCell>{new Date(order.date).toLocaleDateString()}</TableCell>
-                  <TableCell className="font-semibold">${order.amount.toFixed(2)}</TableCell>
+                  <TableCell className="font-semibold">₹{order.amount.toFixed(2)}</TableCell>
                   <TableCell>{order.quantity}</TableCell>
                   <TableCell>{getStatusBadge(order.status)}</TableCell>
                   <TableCell>

@@ -6,9 +6,9 @@ import { moneyData } from '@/data/mockData';
 
 export const MoneyModule: React.FC = () => {
   const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('en-US', {
+    return new Intl.NumberFormat('en-IN', {
       style: 'currency',
-      currency: 'USD',
+      currency: 'INR',
     }).format(amount);
   };
 
@@ -89,10 +89,10 @@ export const MoneyModule: React.FC = () => {
                   />
                   <YAxis 
                     className="text-muted-foreground"
-                    tickFormatter={(value) => `$${value}`}
+                    tickFormatter={(value) => `₹${value}`}
                   />
                   <Tooltip 
-                    formatter={(value, name) => [`$${value}`, name === 'income' ? 'Income' : 'Commission']}
+                    formatter={(value, name) => [`₹${value}`, name === 'income' ? 'Income' : 'Commission']}
                     labelStyle={{ color: 'hsl(var(--foreground))' }}
                     contentStyle={{ 
                       backgroundColor: 'hsl(var(--background))',
@@ -139,10 +139,10 @@ export const MoneyModule: React.FC = () => {
                   />
                   <YAxis 
                     className="text-muted-foreground"
-                    tickFormatter={(value) => `$${value}`}
+                    tickFormatter={(value) => `₹${value}`}
                   />
                   <Tooltip 
-                    formatter={(value) => [`$${value}`, 'Income']}
+                    formatter={(value) => [`₹${value}`, 'Income']}
                     labelStyle={{ color: 'hsl(var(--foreground))' }}
                     contentStyle={{ 
                       backgroundColor: 'hsl(var(--background))',
