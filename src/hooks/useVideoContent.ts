@@ -25,18 +25,18 @@ export const useVideoContent = (): UseVideoContentReturn => {
       setLoading(true);
       setError(null);
       
-      // For development: use mock data if API is not available
-      try {
-        const response = await apiService.getVideoContent();
-        if (response.success && response.data) {
-          setVideoContent(response.data);
-        }
-      } catch (apiError) {
-        // Fallback to mock data for development
+      // Using mock data for development - API commented out
+      // try {
+      //   const response = await apiService.getVideoContent();
+      //   if (response.success && response.data) {
+      //     setVideoContent(response.data);
+      //   }
+      // } catch (apiError) {
+        // Using mock data for development
         const { initialVideoContent } = await import('@/data/mockData');
         setVideoContent(initialVideoContent);
-        console.warn('API not available, using mock data:', apiError);
-      }
+        console.log('Using mock data for development');
+      // }
     } catch (err) {
       const errorMessage = err instanceof ApiError ? err.message : 'Failed to fetch video content';
       setError(errorMessage);
@@ -52,29 +52,30 @@ export const useVideoContent = (): UseVideoContentReturn => {
 
   const addVideoContent = useCallback(async (videoData: Omit<VideoContent, 'id' | '_id' | 'createdAt'>) => {
     try {
-      try {
-        const response = await apiService.createVideoContent(videoData);
-        if (response.success && response.data) {
-          setVideoContent(prev => [...prev, response.data!]);
-          toast({
-            title: 'Video Content Added',
-            description: `${videoData.title} has been added.`,
-          });
-        }
-      } catch (apiError) {
-        // Fallback for development
+      // Using mock data for development - API commented out
+      // try {
+      //   const response = await apiService.createVideoContent(videoData);
+      //   if (response.success && response.data) {
+      //     setVideoContent(prev => [...prev, response.data!]);
+      //     toast({
+      //       title: 'Video Content Added',
+      //       description: `${videoData.title} has been added.`,
+      //     });
+      //   }
+      // } catch (apiError) {
+        // Using mock data for development
         const newVideo: VideoContent = {
           ...videoData,
           id: Date.now().toString(),
-          createdAt: new Date().toISOString(),
+          uploadDate: new Date().toISOString().split('T')[0],
         };
         
         setVideoContent(prev => [...prev, newVideo]);
         toast({
-          title: 'Video Content Added (Local)',
-          description: `${videoData.title} added locally. Connect to backend to persist.`,
+          title: 'Video Content Added',
+          description: `${videoData.title} has been added.`,
         });
-      }
+      // }
     } catch (err) {
       const errorMessage = err instanceof ApiError ? err.message : 'Failed to add video content';
       toast({
@@ -87,23 +88,24 @@ export const useVideoContent = (): UseVideoContentReturn => {
 
   const updateVideoContent = useCallback(async (id: string, videoData: Partial<VideoContent>) => {
     try {
-      try {
-        const response = await apiService.updateVideoContent(id, videoData);
-        if (response.success && response.data) {
-          setVideoContent(prev => prev.map(v => v.id === id ? response.data! : v));
-          toast({
-            title: 'Video Content Updated',
-            description: 'Video content has been successfully updated.',
-          });
-        }
-      } catch (apiError) {
-        // Fallback for development
+      // Using mock data for development - API commented out
+      // try {
+      //   const response = await apiService.updateVideoContent(id, videoData);
+      //   if (response.success && response.data) {
+      //     setVideoContent(prev => prev.map(v => v.id === id ? response.data! : v));
+      //     toast({
+      //       title: 'Video Content Updated',
+      //       description: 'Video content has been successfully updated.',
+      //     });
+      //   }
+      // } catch (apiError) {
+        // Using mock data for development
         setVideoContent(prev => prev.map(v => v.id === id ? { ...v, ...videoData } : v));
         toast({
-          title: 'Video Content Updated (Local)',
-          description: 'Video content updated locally. Connect to backend to persist.',
+          title: 'Video Content Updated',
+          description: 'Video content has been successfully updated.',
         });
-      }
+      // }
     } catch (err) {
       const errorMessage = err instanceof ApiError ? err.message : 'Failed to update video content';
       toast({
@@ -118,23 +120,24 @@ export const useVideoContent = (): UseVideoContentReturn => {
     try {
       const video = videoContent.find(v => v.id === id);
       
-      try {
-        await apiService.deleteVideoContent(id);
+      // Using mock data for development - API commented out
+      // try {
+      //   await apiService.deleteVideoContent(id);
+      //   setVideoContent(prev => prev.filter(v => v.id !== id));
+      //   toast({
+      //     title: 'Content Deleted',
+      //     description: `${video?.title} has been removed.`,
+      //     variant: 'destructive',
+      //   });
+      // } catch (apiError) {
+        // Using mock data for development
         setVideoContent(prev => prev.filter(v => v.id !== id));
         toast({
           title: 'Content Deleted',
           description: `${video?.title} has been removed.`,
           variant: 'destructive',
         });
-      } catch (apiError) {
-        // Fallback for development
-        setVideoContent(prev => prev.filter(v => v.id !== id));
-        toast({
-          title: 'Content Deleted (Local)',
-          description: `${video?.title} removed locally. Connect to backend to persist.`,
-          variant: 'destructive',
-        });
-      }
+      // }
     } catch (err) {
       const errorMessage = err instanceof ApiError ? err.message : 'Failed to delete video content';
       toast({
