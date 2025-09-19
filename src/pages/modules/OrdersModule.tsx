@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Package, Clock, CheckCircle, XCircle, RotateCcw } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Button } from '@/components/ui/button';
 import { Order, initialOrders } from '@/data/mockData';
@@ -120,78 +119,94 @@ export const OrdersModule: React.FC = () => {
             <CardTitle className="text-sm font-medium">Revenue</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">₹{stats.totalRevenue.toFixed(2)}</div>
+            <div className="text-2xl font-bold">₹{(stats.totalRevenue / 100).toFixed(0)}</div>
           </CardContent>
         </Card>
       </div>
 
-      {/* Orders Table */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Recent Orders</CardTitle>
-          <CardDescription>
-            Manage order statuses and track customer purchases.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Order ID</TableHead>
-                <TableHead>Product</TableHead>
-                <TableHead>Customer</TableHead>
-                <TableHead>Date</TableHead>
-                <TableHead>Amount</TableHead>
-                <TableHead>Quantity</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead>Actions</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {orders.map((order) => (
-                <TableRow key={order.id}>
-                  <TableCell className="font-mono text-sm">{order.id}</TableCell>
-                  <TableCell className="font-medium">{order.productName}</TableCell>
-                  <TableCell>{order.customerName}</TableCell>
-                  <TableCell>{new Date(order.date).toLocaleDateString()}</TableCell>
-                  <TableCell className="font-semibold">₹{order.amount.toFixed(2)}</TableCell>
-                  <TableCell>{order.quantity}</TableCell>
-                  <TableCell>{getStatusBadge(order.status)}</TableCell>
-                  <TableCell>
-                    <div className="flex items-center space-x-2">
-                      <Select
-                        value={order.status}
-                        onValueChange={(value) => updateOrderStatus(order.id, value as Order['status'])}
-                      >
-                        <SelectTrigger className="w-32">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {statusOptions.map((status) => (
-                            <SelectItem key={status} value={status}>
-                              {status.charAt(0).toUpperCase() + status.slice(1)}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                      {order.status === 'pending' && (
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          onClick={() => cancelOrder(order.id)}
-                          className="text-destructive hover:text-destructive"
-                        >
-                          Cancel
-                        </Button>
-                      )}
-                    </div>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </CardContent>
-      </Card>
+      {/* Orders Grid */}
+      <div>
+        <div className="flex justify-between items-center mb-6">
+          <div>
+            <h2 className="text-2xl font-bold">Recent Orders</h2>
+            <p className="text-muted-foreground">Manage order statuses and track customer purchases</p>
+          </div>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {orders.map((order) => (
+            <Card key={order.id} className="hover:shadow-lg transition-all duration-200">
+              <CardHeader className="pb-3">
+                <div className="flex justify-between items-start">
+                  <div>
+                    <CardTitle className="text-sm font-mono text-muted-foreground">
+                      {order.id}
+                    </CardTitle>
+                    <CardDescription className="font-semibold text-foreground mt-1">
+                      {order.productName}
+                    </CardDescription>
+                  </div>
+                  {getStatusBadge(order.status)}
+                </div>
+              </CardHeader>
+              
+              <CardContent className="space-y-4">
+                <div className="space-y-2">
+                  <div className="flex justify-between">
+                    <span className="text-sm text-muted-foreground">Customer:</span>
+                    <span className="text-sm font-medium">{order.customerName}</span>
+                  </div>
+                  
+                  <div className="flex justify-between">
+                    <span className="text-sm text-muted-foreground">Date:</span>
+                    <span className="text-sm font-medium">{new Date(order.date).toLocaleDateString()}</span>
+                  </div>
+                  
+                  <div className="flex justify-between">
+                    <span className="text-sm text-muted-foreground">Quantity:</span>
+                    <span className="text-sm font-medium">{order.quantity} units</span>
+                  </div>
+                  
+                  <div className="flex justify-between">
+                    <span className="text-sm text-muted-foreground">Amount:</span>
+                    <span className="text-lg font-bold text-primary">₹{(order.amount / 100).toFixed(0)}</span>
+                  </div>
+                </div>
+                
+                <div className="space-y-2 pt-2 border-t">
+                  <Select
+                    value={order.status}
+                    onValueChange={(value) => updateOrderStatus(order.id, value as Order['status'])}
+                  >
+                    <SelectTrigger className="w-full">
+                      <SelectValue placeholder="Update status" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {statusOptions.map((status) => (
+                        <SelectItem key={status} value={status}>
+                          {status.charAt(0).toUpperCase() + status.slice(1)}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  
+                  {order.status === 'pending' && (
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => cancelOrder(order.id)}
+                      className="w-full text-destructive hover:text-destructive"
+                    >
+                      <XCircle className="w-4 h-4 mr-2" />
+                      Cancel Order
+                    </Button>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };
