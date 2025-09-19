@@ -39,7 +39,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({
       setFormData({
         name: product.name,
         category: product.category,
-        price: product.price.toString(),
+        price: (product.price / 100).toString(),
         stock: product.stock.toString(),
         status: product.status
       });

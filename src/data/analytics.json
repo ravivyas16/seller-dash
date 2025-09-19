@@ -1,0 +1,44 @@
+{
+  "moneyData": {
+    "totalIncome": 850045,
+    "commission": 85005,
+    "pendingPayout": 234020,
+    "incomeHistory": [
+      { "month": "Oct", "income": 220000, "commission": 22000 },
+      { "month": "Nov", "income": 280000, "commission": 28000 },
+      { "month": "Dec", "income": 320000, "commission": 32000 },
+      { "month": "Jan", "income": 290000, "commission": 29000 },
+      { "month": "Feb", "income": 350000, "commission": 35000 }
+    ]
+  },
+  "socialMetrics": {
+    "followers": 25400,
+    "totalViews": 125000,
+    "totalLikes": 8900,
+    "totalShares": 1200,
+    "totalReach": 185000,
+    "engagementRate": 7.8
+  },
+  "salesData": {
+    "totalSales": 156,
+    "conversionRate": 3.2,
+    "topProducts": [
+      { "name": "Wireless Headphones", "sales": 45 },
+      { "name": "Leather Wallet", "sales": 32 },
+      { "name": "Water Bottle", "sales": 28 },
+      { "name": "Yoga Mat", "sales": 22 },
+      { "name": "Cotton T-Shirt", "sales": 18 }
+    ],
+    "salesByCategory": [
+      { "category": "Electronics", "value": 35 },
+      { "category": "Accessories", "value": 25 },
+      { "category": "Clothing", "value": 20 },
+      { "category": "Home & Kitchen", "value": 15 },
+      { "category": "Sports & Fitness", "value": 5 }
+    ],
+    "lowStockAlerts": [
+      { "name": "Yoga Mat Pro", "stock": 15 },
+      { "name": "Premium Leather Wallet", "stock": 23 }
+    ]
+  }
+}

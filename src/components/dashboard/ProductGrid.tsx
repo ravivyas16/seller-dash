@@ -6,7 +6,7 @@ import {
   Image as ImageIcon, 
   Video, 
   Package, 
-  DollarSign,
+  Tag,
   Eye,
   MoreHorizontal,
   Edit,
@@ -152,9 +152,9 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
                 
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-1">
-                    <DollarSign className="h-4 w-4 text-primary" />
+                    <Tag className="h-4 w-4 text-primary" />
                     <span className="text-xl font-bold text-primary">
-                      ₹{product.price.toFixed(2)}
+                      ₹{(product.price / 100).toFixed(0)}
                     </span>
                   </div>
                   

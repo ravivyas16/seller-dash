@@ -1,0 +1,56 @@
+[
+  {
+    "id": "ORD-001",
+    "productName": "Wireless Bluetooth Headphones",
+    "customerName": "John Smith",
+    "status": "delivered",
+    "date": "2024-02-20",
+    "amount": 8999,
+    "quantity": 1
+  },
+  {
+    "id": "ORD-002",
+    "productName": "Premium Leather Wallet",
+    "customerName": "Sarah Johnson",
+    "status": "shipped",
+    "date": "2024-02-22",
+    "amount": 4999,
+    "quantity": 1
+  },
+  {
+    "id": "ORD-003",
+    "productName": "Stainless Steel Water Bottle",
+    "customerName": "Mike Wilson",
+    "status": "pending",
+    "date": "2024-02-23",
+    "amount": 3998,
+    "quantity": 2
+  },
+  {
+    "id": "ORD-004",
+    "productName": "Wireless Bluetooth Headphones",
+    "customerName": "Emma Davis",
+    "status": "delivered",
+    "date": "2024-02-18",
+    "amount": 8999,
+    "quantity": 1
+  },
+  {
+    "id": "ORD-005",
+    "productName": "Premium Leather Wallet",
+    "customerName": "David Brown",
+    "status": "returned",
+    "date": "2024-02-15",
+    "amount": 4999,
+    "quantity": 1
+  },
+  {
+    "id": "ORD-006",
+    "productName": "Yoga Mat Pro",
+    "customerName": "Lisa Anderson",
+    "status": "pending",
+    "date": "2024-02-24",
+    "amount": 3999,
+    "quantity": 1
+  }
+]
