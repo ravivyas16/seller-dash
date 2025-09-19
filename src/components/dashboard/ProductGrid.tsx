@@ -152,7 +152,6 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
                 
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-1">
-                    <Tag className="h-4 w-4 text-primary" />
                     <span className="text-xl font-bold text-primary">
                       ₹{(product.price / 100).toFixed(0)}
                     </span>
